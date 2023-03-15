@@ -40,12 +40,14 @@ public class Encryptor {
         }
 
         for(int i=0;i< letterBlock.length;i++){
-            for(int j=0;j<letterBlock[0].length;j++){
-                letterBlock[i][j]=str.substring(0,1);
-                str=str.substring(1);
+            for(int j=0;j<letterBlock[0].length;j++) {
+                letterBlock[i][j] = str.substring(0, 1);
+                str = str.substring(1);
             }
         }
     }
+
+
     /** Extracts encrypted string from letterBlock in column-major order.
      *
      *   Precondition: letterBlock has been filled
@@ -69,15 +71,18 @@ public class Encryptor {
      *  @return the encrypted message; if message is the empty string, returns the empty string
      */
     public String encryptMessage(String message) {
-        while(message.length()<=numCols*numRows){
+        String temp="";
+        while(message.length()>=numCols*numRows){
             fillBlock(message);
-            
+            temp+=encryptBlock();
+            message=message.substring(numCols*numRows);
         }
-        String str="";
-        for(String[] set:letterBlock){
-            str+=encryptBlock();
+        if(message.equals("")){
+            return temp;
         }
-        return str;
+        fillBlock(message);
+        temp+=encryptBlock();
+        return temp;
     }
 
     /**  Decrypts an encrypted message. All filler 'A's that may have been
@@ -102,9 +107,29 @@ public class Encryptor {
      *        (e.g. a method to decrypt each section of the decrypted message,
      *         similar to how encryptBlock was used)
      */
+
     public String decryptMessage(String encryptedMessage) {
-        /* to be implemented in part (d) */
+        int space=letterBlock.length;
+        letterBlockReverse(numRows, numCols);
+
+        String temp= encryptMessage(encryptedMessage);
+        if(temp.indexOf("AA")==-1){
+            return temp;
+        }
+        temp=temp.substring(0,temp.indexOf("AA"));
+
+
+        return temp;
+
     }
+
+    public void letterBlockReverse(int r, int c){
+        letterBlock = new String[c][r];
+        numRows = c;
+        numCols = r;
+    }
+
+
 
 
 

@@ -28,7 +28,8 @@ public class EncryptorTester {
         Encryptor encryptor2 = new Encryptor(3, 5);
         encryptor2.fillBlock("Meet at midnight");
 
-        String[][] expected2 = {{"M", "e", "e", "t", " "},
+        String[][] expected2 = {
+                {"M", "e", "e", "t", " "},
                 {"a", "t", " ", "m", "i"},
                 {"d", "n", "i", "g", "h"}};
 
@@ -182,7 +183,7 @@ public class EncryptorTester {
           System.out.println("  ACTUAL: " + actualEncrypted5);
         }
 
-    /*
+
         // -------------------------------------
         // ---- TEST PART D: decryptMessage ----
         // -------------------------------------
@@ -197,6 +198,8 @@ public class EncryptorTester {
           System.out.println("EXPECTED: " + expectedDecrypted1);
           System.out.println("  ACTUAL: " + actualDecrypted1);
         }
+
+        encryptorTest2 = new Encryptor(2, 3);
 
         String actualDecrypted2 = encryptorTest2.decryptMessage("L'est goou tsei.d A ryeouK  Owi tthhaAtA?A");
         String expectedDecrypted2 = "Let's go outside. Are you OK with that?";
@@ -240,7 +243,10 @@ public class EncryptorTester {
           System.out.println("EXPECTED: " + expectedDecrypted6);
           System.out.println("  ACTUAL: " + actualDecrypted6);
         }
-    */
+
+        Encryptor test=new Encryptor(3,4);
+        System.out.println(test.decryptMessage("Hayoroweu   dgio sit nhmonArgAn?Ai A"));
+
     }
 
     public static void print2DArray(String[][] arr) {
